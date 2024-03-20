@@ -4,6 +4,7 @@
 #include "BattleFieldChanger.h"
 #include "BattleField.h"
 #include "SquadChanger.h"
+#include <stdexcept>
 
 void BattleFieldChanger::move(const std::shared_ptr<BattleField>& field, std::shared_ptr<entity::Entity> entity, int index1) {
     std::shared_ptr<Squad> const squad = field->getSquad(entity);

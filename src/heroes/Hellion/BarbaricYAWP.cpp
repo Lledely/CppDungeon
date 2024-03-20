@@ -5,7 +5,7 @@
 #include "effects/Bleed.h"
 namespace Heroes {
     namespace Hellion {
-        BarbaricYAWP::BarbaricYAWP() : RangeSkill(2, "BarbaricYAWP", {1, 2}, {}, {1}, 95, 0) {}
+        BarbaricYAWP::BarbaricYAWP() : RangeSkill(2, "BarbaricYAWP", {1, 2}, {}, {1, 2}, 95, 0) {}
 
         void BarbaricYAWP::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

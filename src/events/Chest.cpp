@@ -8,39 +8,72 @@
 #include "navigation/Cell.h"
 #include "navigation/Map.h"
 #include "items/Item.h"
+#include <string>
+#include <vector>
 #include <memory>
 #include "monitor/Monitor.h"
+#include "items/Absinthe.h"
+#include "generators/SkillActionsGenerator.h"
 
 bool events::Chest::comp(std::set<std::shared_ptr<actions::Action>>::iterator actionIterator) {
-    actions::Use* use = dynamic_cast<actions::Use*>((*actionIterator).get());
-    return static_cast<bool>(use && (use->getChest()).get() == this);
+    auto use = std::dynamic_pointer_cast<actions::Use>((*actionIterator));
+    return static_cast<bool>(use && (use->getUsableEvent()).get() == this);
 }
 
 void events::Chest::turn(Player *player) {
-    player->getMonitor()->draw();
+    player->getMap()->getCell(player->getPosition())->freeMoves(player);
+    player->getMonitor()->draw(player);
     if (!m_used) {
-        std::shared_ptr<actions::Action> useAction(new actions::Use(std::shared_ptr<Chest>(this)));
-        addAction(player, std::move(useAction));
+        addUniqueAction(player, std::make_shared<actions::Use>(shared_from_this()));
     }
-    player->getMap()->getCell(player->getPosition())->freeMoves(player, std::shared_ptr<Event>(this));
+    player->getMap()->getCell(player->getPosition())->freeMoves(player, this);
 }
 
 void events::Chest::use(Player *player) {
-    std::shared_ptr<items::Item> item = std::make_shared<items::Item>();//TODO: Change it to grabbing from Main fabric
-    addItem(player, item);
+    addItem(player, std::make_shared<items::Absinthe::Absinthe>());
     removeAction(player, [this](std::set<std::shared_ptr<actions::Action>>::iterator actionIterator){return comp(actionIterator);});
     m_used = true;
 }
 
 std::vector<std::vector<char>> events::Chest::draw() {
-//     -------
-//    |___-___|
-//    |__|_|__|
-//    |___-___|
-//     -------
-    return {{' ', '-', '-', '-', '-', '-', '-', '-', ' ' },
-            {'|', '_', '_', '_', '-', '_', '_', '_', '|' },
-            {'|', '_', '_', '|', '-', '|', '_', '_', '|' },
-            {'|', '_', '_', '_', '-', '_', '_', '_', '|' },
-            {' ', '-', '-', '-', '-', '-', '-', '-', ' ' }};
+    if(!m_used){
+        std::vector<std::string> strings =
+                {"                   ",
+                 "                   ",
+                 "                   ",
+                 "                   ",
+                 "    -=++++++++++-: ",
+                 "   .-***********+- ",
+                 "   -+************=:",
+                 ".-++===-===--===++:",
+                 ".==*###*+*+####++=.",
+                 "   =+##########*=- ",
+                 "   -=+++====++++=. "};
+        std::vector<std::vector<char>> toReturn;
+        for(auto str:strings){
+            toReturn.push_back(std::vector<char>());
+            std::copy(str.begin(), str.end(), std::back_inserter(toReturn.back()));
+        }
+        return toReturn;
+    }
+    else{
+        std::vector<std::string> strings =
+                {"                   ",
+                "      ....  .....  ",
+                "     -#%########+  ",
+                "     -#%#######*=. ",
+                "     =%%#######*+: ",
+                "    .#*++++++++**= ",
+                "   +#%%%%%%%%%%%+: ",
+                ":=+*************+-.",
+                ".==*###*+*+####++=.",
+                "   =+##########*=- ",
+                "   -=+++====++++=. "};
+        std::vector<std::vector<char>> toReturn;
+        for(auto str:strings){
+            toReturn.push_back(std::vector<char>());
+            std::copy(str.begin(), str.end(), std::back_inserter(toReturn.back()));
+        }
+        return toReturn;
+    }
 }

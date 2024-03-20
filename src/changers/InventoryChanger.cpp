@@ -8,10 +8,10 @@ Inventory& changers::InventoryChanger::getInventory(Player *player){
     return player->m_inventory;
 }
 
-void changers::InventoryChanger::addItem(Player* player,const std::shared_ptr<Item>& item) {
+void changers::InventoryChanger::addItem(Player* player,const std::shared_ptr<items::Item>& item) {
     player->m_inventory.addItem(item);
 }
 
-void changers::InventoryChanger::removeItem(Player* player,const std::shared_ptr<Item>& item) {
+void changers::InventoryChanger::removeItem(Player* player,const std::shared_ptr<items::Item>& item) {
     player->m_inventory.removeItem(item);
 }

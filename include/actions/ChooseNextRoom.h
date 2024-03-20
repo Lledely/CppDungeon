@@ -6,15 +6,19 @@
 #define CPPDUNGEON_CHOOSENEXTROOM_H
 #include "actions/Action.h"
 #include "changers/PositionChanger.h"
+#include "navigation/Position.h"
 #include <utility>
 
 namespace actions {
     class ChooseNextRoom : public Action, public changers::PositionChanger {
     public:
-        explicit ChooseNextRoom(char);
+        explicit ChooseNextRoom(Position);
         void act(Player *player) override;
+        virtual std::string getName() override;
+        Position getPostion();
+        bool operator==(const ChooseNextRoom&) const;
     private:
-        char m_room;
+        Position m_room;
     };
 } // namespace actions
 #endif //CPPDUNGEON_CHOOSENEXTROOM_H

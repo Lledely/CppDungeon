@@ -4,12 +4,13 @@
 
 #ifndef CPPDUNGEON_BATTLEFIELD_H
 #define CPPDUNGEON_BATTLEFIELD_H
-#include "memory"
+#include <memory>
 #include "namespaces/entity.h"
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
-class Squad;
+#include "namespaces/battlefield.h"
+#include <vector>
 
 class BattleField {
 private:

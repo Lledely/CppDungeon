@@ -11,7 +11,7 @@
 #include "changers/EffectChanger.h"
 #include "namespaces/entity.h"
 #include "namespaces/effects.h"
-class BattleField;
+#include "namespaces/battlefield.h"
 namespace skillDesigns {
     class Skill : public BattleFieldChanger, public changers::EffectChanger {
     public:

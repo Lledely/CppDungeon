@@ -5,8 +5,10 @@
 #include "BattleField.h"
 #include "Squad.h"
 #include <memory>
+#include <stdexcept>
+#include <algorithm>
 #include <vector>
-
+#include <algorithm>
 
 BattleField::BattleField(
     std::shared_ptr<Squad> ally,
@@ -37,6 +39,10 @@ std::shared_ptr<Squad> BattleField::getSquad(const std::shared_ptr<entity::Entit
         if (entity == target) {
             return m_enemy;
         }
+    }
+
+    if(!ans){
+        throw std::logic_error("No such entity on this squad");
     }
     return ans;
 }

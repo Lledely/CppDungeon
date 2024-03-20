@@ -13,6 +13,7 @@ namespace skillDesigns {
     protected:
         std::string isDesignUsable(std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor,
                                    std::vector<std::shared_ptr<entity::Entity>> objects) override;
+        std::string isImplementationUsable(std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor, std::vector<std::shared_ptr<entity::Entity>> objects) override;
 
     private:
         int m_size;

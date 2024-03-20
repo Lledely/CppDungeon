@@ -5,7 +5,7 @@
 #include "effects/Bleed.h"
 namespace Heroes {
     namespace Hellion {
-        Breakthrough::Breakthrough() : RangeSkill(3, "Breakthrough", {2, 3, 4}, {}, {1}, 85, -1) {}
+        Breakthrough::Breakthrough() : RangeSkill(3, "Breakthrough", {2, 3, 4}, {}, {1, 2, 3, 4}, 85, -1) {}
 
         void Breakthrough::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

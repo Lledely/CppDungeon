@@ -6,6 +6,7 @@
 #define UNTITLED_ROOM_H
 #include "navigation/Cell.h"
 class Room:public Cell{
+    bool m_used = false;
 public:
     void generateEvents() override;
 };

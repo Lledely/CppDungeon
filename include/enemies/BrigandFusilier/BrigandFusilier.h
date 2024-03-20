@@ -4,8 +4,8 @@
 #ifndef UNTITLED_BRIGANDFUSILIER_H
 #define UNTITLED_BRIGANDFUSILIER_H
 #include "entity/Enemy.h"
-#include "enemies/BrigandFusier/BlanketFire.h"
-#include "enemies/BrigandFusier/RushedShot.h"
+#include "enemies/BrigandFusilier/BlanketFire.h"
+#include "enemies/BrigandFusilier/RushedShot.h"
 namespace enemies {
     namespace BrigandFusilier {
         class BrigandFusilier : public entity::Enemy {

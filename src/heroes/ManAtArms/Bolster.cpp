@@ -5,7 +5,7 @@
 #include "effects/Bleed.h"
 namespace Heroes {
     namespace ManAtArms {
-        Bolster::Bolster() : RangeSkill(4, "Bolster", {1, 2, 3, 4}, {1}, {}, 100) {}
+        Bolster::Bolster() : RangeSkill(3, "Bolster", {1, 2, 3, 4}, {1, 2, 3, 4}, {}, 100) {}
 
         void Bolster::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

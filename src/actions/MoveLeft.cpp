@@ -9,11 +9,20 @@ namespace actions {
 
     void MoveLeft::act(Player *player) {
         setPosition(player, player -> getMap() -> moveLeft(player->getPosition()));
+        returnToDefault(player);
         std::shared_ptr<Cell> temp = player->getMap()->getCell(player->getPosition());
         temp->generateEvents();
-        for(int i = 0; i < temp->getEvents().size(); i++) {
-            temp->getEvents()[i]->turn(player);
+        for(const auto& event:temp->getEvents()) {
+            if(event) {
+                event->turn(player);
+            }
         }
-        returnToDefault(player);
+    }
+
+    std::string MoveLeft::getName() {
+        return "Move Player left";
+    }
+    bool MoveLeft::operator==(const actions::MoveLeft &moveRight) const {
+        return true;
     }
 }//namespace actions

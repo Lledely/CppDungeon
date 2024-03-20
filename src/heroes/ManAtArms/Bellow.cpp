@@ -5,7 +5,7 @@
 #include "effects/Bleed.h"
 namespace Heroes {
     namespace ManAtArms {
-        Bellow::Bellow() : RangeSkill(4, "Bellow", {1, 2, 3, 4}, {}, {1}, 90) {}
+        Bellow::Bellow() : RangeSkill(3, "Bellow", {1, 2, 3, 4}, {}, {1, 2, 3, 4}, 90) {}
 
         void Bellow::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

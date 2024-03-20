@@ -5,6 +5,7 @@
 #include "effects/MarkedAsTurnable.h"
 #include "entity/Entity.h"
 #include "changers/EntityChanger.h"
+#include <stdexcept>
 
 namespace effects {
     AutoAction::AutoAction(int numberOfTurns, const std::map<int, int>& turner):

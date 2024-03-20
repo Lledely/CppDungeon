@@ -7,7 +7,7 @@
 #include "effects/ImmediateEffect.h"
 #include "effects/Move.h"
 #include "effects/MarkedAsResistable.h"
-class BattleField;
+#include "namespaces/battlefield.h"
 namespace effects {
     class ForceMove: public Move, public MarkedAsResistable {
     public:

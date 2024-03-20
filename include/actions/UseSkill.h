@@ -10,13 +10,13 @@
 #include "namespaces/entity.h"
 #include "skillDesigns/RangeSkill.h"
 
-class Skill;
 namespace actions {
     class UseSkill : public Action {
     public:
         UseSkill(std::shared_ptr<skillDesigns::RangeSkill> skill, std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor,
                  std::vector<std::shared_ptr<entity::Entity>> objects);
         void act(Player *) override;
+        std::string getName() override;
     private:
         std::shared_ptr<skillDesigns::RangeSkill> m_skill;
         std::shared_ptr<BattleField> m_battleField;

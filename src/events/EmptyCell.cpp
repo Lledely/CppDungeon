@@ -6,12 +6,13 @@
 #include "monitor/Monitor.h"
 #include "player/Player.h"
 
-void EmptyCell::turn(Player* player) {
-    player->getMonitor()->draw();
-    player->getMap()->getCell(player->getPosition())->freeMoves(player, std::shared_ptr<Event>(this));
+void events::EmptyCell::turn(Player* player) {
+    player->getMap()->getCell(player->getPosition())->freeMoves(player);
+    player->getMonitor()->draw(player);
+    player->getMap()->getCell(player->getPosition())->freeMoves(player, this);
 }
 
-std::vector<std::vector<char>> EmptyCell::draw() {
+std::vector<std::vector<char>> events::EmptyCell::draw() {
     std::vector<std::vector<char>> sprite;
     sprite.push_back(std::vector<char>{'/',  '-', '-', '-', '-', '-', '\\'});
     sprite.push_back(std::vector<char>{'|',  'E', 'M', 'P', 'T', 'Y', '|' });

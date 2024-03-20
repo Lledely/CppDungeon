@@ -3,14 +3,14 @@
 //
 #include "player/Inventory.h"
 #include <set>
-void Inventory::addItem(const std::shared_ptr<Item>& item) {
+void Inventory::addItem(const std::shared_ptr<items::Item>& item) {
     m_items.insert(item);
 }
 
-void Inventory::removeItem(const std::shared_ptr<Item>& item) {
+void Inventory::removeItem(const std::shared_ptr<items::Item>& item) {
     m_items.erase(item);
 }
 
-std::multiset<std::shared_ptr<Item>> Inventory::getItems() {
+std::multiset<std::shared_ptr<items::Item>> Inventory::getItems() {
     return m_items;
 }

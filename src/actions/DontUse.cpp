@@ -2,6 +2,8 @@
 // Created by kait on 3/3/24.
 //
 #include "actions/DontUse.h"
+
+#include <utility>
 #include "events/Trap.h"
 
 namespace actions {
@@ -13,5 +15,13 @@ namespace actions {
 
     std::shared_ptr<events::Trap> DontUse::getTrap() const {
         return m_trap;
+    }
+
+    std::string DontUse::getName() {
+        return "Dont Use Trap(Known damage)";
+    }
+
+    bool DontUse::operator==(const actions::DontUse &dontUse) const {
+        return m_trap == dontUse.m_trap;
     }
 }//namespace actions

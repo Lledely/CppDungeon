@@ -3,6 +3,10 @@
 //
 #include "SquadChanger.h"
 #include "Squad.h"
+#include <algorithm>
+#include <stdexcept>
+#include <cmath>
+
 void SquadChanger::move(const std::shared_ptr<Squad>& squad, int index1, int index2) {
     if (index1 < 0 || index1 >= squad->m_squad.size()) { throw std::invalid_argument("index is out of range"); }
     if (index2 >= squad->m_squad.size())  { index2 = static_cast<int>(squad->m_squad.size()) - 1;}

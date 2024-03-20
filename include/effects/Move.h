@@ -6,7 +6,7 @@
 #define CPPDUNGEON_MOVE_H
 #include "effects/ImmediateEffect.h"
 #include "effects/MarkedAsBattleFieldNeeded.h"
-class BattleField;
+#include "namespaces/battlefield.h"
 namespace effects {
     class Move: public ImmediateEffect, public MarkedAsBattleFieldNeeded {
         int m_offset;

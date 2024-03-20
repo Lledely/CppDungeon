@@ -10,6 +10,7 @@ public:
     char getLine();
     char getColumn();
     char getDestination();
+    bool operator==(const Position &) const = default;
 private:
     char m_line;
     char m_column;

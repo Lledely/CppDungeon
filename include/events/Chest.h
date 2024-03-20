@@ -8,7 +8,8 @@
 #include "changers/InventoryChanger.h"
 class Player;
 namespace events {
-    class Chest : public events::UsableEvent, public changers::InventoryChanger {
+    class Chest : public events::UsableEvent, public changers::InventoryChanger, public std::enable_shared_from_this<UsableEvent> {
+    protected:
         bool m_used = false;
 
         bool comp(std::set<std::shared_ptr<actions::Action>>::iterator actionIterator);

@@ -6,6 +6,7 @@
 #define UNTITLED_HALL_H
 #include "navigation/Cell.h"
 class Hall:public Cell{
+    bool m_used = false;
 public:
     void generateEvents() override;
 };

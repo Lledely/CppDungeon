@@ -14,7 +14,7 @@ class Map;
 class Monitor;
 #include "namespaces/actions.h"
 #include "namespaces/changers.h"
-class Squad;
+#include "namespaces/battlefield.h"
 class Player{
     Position m_position;
     Inventory m_inventory;
@@ -23,16 +23,15 @@ class Player{
     friend changers::ActionsChanger;
     friend changers::PositionChanger;
     friend changers::InventoryChanger;
-    Monitor* m_monitor;
-    Map* m_map;
+    std::shared_ptr<Monitor> m_monitor;
+    std::shared_ptr<Map> m_map;
 public:
-    explicit Player(Map* map);
-    Monitor* getMonitor();
-    void setMonitor(Monitor* map);
+    explicit Player(const std::shared_ptr<Map>& map, const std::shared_ptr<Monitor>& monitor,const std::shared_ptr<Squad>& squad);
+    std::shared_ptr<Monitor> getMonitor();
     Position getPosition();
     std::shared_ptr<Squad> getSquad();
     std::set<std::shared_ptr<actions::Action>> getActions();
     Inventory getInventory();
-    Map* getMap();
+    std::shared_ptr<Map> getMap();
 };
 #endif //UNTITLED_PLAYER_H

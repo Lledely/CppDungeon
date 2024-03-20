@@ -1,6 +1,5 @@
 #include "entity/Entity.h"
 #include "enemies/BrigandFusier/BrigandFusilier.h"
-#include "enemies/CultistAcolyte/CultistAcolyte.h"
 #include "enemies/BrigandRaider/BrigandRaider.h"
 <<<<<<< HEAD
 #include "generators/SkillActionsGenerator.h"

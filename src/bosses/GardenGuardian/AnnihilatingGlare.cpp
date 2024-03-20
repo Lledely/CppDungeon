@@ -7,7 +7,7 @@
 #include "effects/Blight.h"
 namespace Bosses {
     namespace GardenGuardian {
-        AnnihilatingGlare::AnnihilatingGlare() : RangeSkill(4, "AnnihilatingGlare", {1, 2, 3, 4}, {}, {1}, 103, 12) {}
+        AnnihilatingGlare::AnnihilatingGlare() : RangeSkill(3, "AnnihilatingGlare", {1, 2, 3, 4}, {}, {1, 2, 3, 4}, 103, 12) {}
 
         void AnnihilatingGlare::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

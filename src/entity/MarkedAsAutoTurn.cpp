@@ -1,0 +1,19 @@
+#include "BattleField.h"
+#include "changers/ActionsChanger.h"
+#include "entity/Enemy.h"
+#include "entity/MarkedAsAutoTurn.h"
+#include "events/EnemyEncounter.h"
+#include "entity/Hero.h"
+#include "enemies/BrigandRaider/BrigandRaider.h"
+#include "enemies/BrigandFusier/BrigandFusilier.h"
+#include "enemies/CultistAcolyte/CultistAcolyte.h"
+#include "navigation/Map.h"
+#include "player/Player.h"
+#include "actions/UseSkill.h"
+#include "actions/UseItem.h"
+#include "generators/NumberGenerator.h"
+#include <memory>
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
+

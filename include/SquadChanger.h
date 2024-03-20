@@ -6,7 +6,7 @@
 #define CPPDUNGEON_SQUADCHANGER_H
 #include "memory"
 #include "namespaces/entity.h"
-class Squad;
+#include "namespaces/battlefield.h"
 
 class SquadChanger {
 public:

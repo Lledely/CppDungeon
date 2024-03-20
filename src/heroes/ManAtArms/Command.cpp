@@ -5,7 +5,7 @@
 #include "effects/Bleed.h"
 namespace Heroes {
     namespace ManAtArms {
-        Command::Command() : RangeSkill(4, "Command", {1, 2, 3, 4}, {1}, {}, 100) {}
+        Command::Command() : RangeSkill(3, "Command", {1, 2, 3, 4}, {1, 2, 3, 4}, {}, 100) {}
 
         void Command::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

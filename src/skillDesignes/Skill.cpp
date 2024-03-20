@@ -11,7 +11,17 @@ namespace skillDesigns {
                  std::vector<int> availableEnemyTarget, int accuracy, int criticalDamageChance) :
             m_name(name), m_availableRank(availableRank), m_availableAllyTarget(availableAllyTarget),
             m_availableEnemyTarget(availableEnemyTarget), m_accuracy(accuracy),
-            m_criticalDamageChance(criticalDamageChance) {}
+            m_criticalDamageChance(criticalDamageChance) {
+        for(auto& i:m_availableRank){
+            i--;
+        }
+        for(auto& i:m_availableAllyTarget){
+            i--;
+        }
+        for(auto& i:m_availableEnemyTarget){
+            i--;
+        }
+    }
 
     std::vector<int> Skill::getAvaibleRank() {
         return m_availableRank;
@@ -33,8 +43,13 @@ namespace skillDesigns {
                     std::vector<std::shared_ptr<entity::Entity>> objects) {
         std::string tryUse = isUsable(battleField, actor, objects);
         if (tryUse.empty()) {
+
             if (missed(actor) <= 0) {
                 unsafeUse(crited(actor), battleField, actor, objects);
+                return "passed";
+            }
+            else{
+                return "missed";
             }
         }
         return tryUse;
@@ -44,7 +59,12 @@ namespace skillDesigns {
                                 std::vector<std::shared_ptr<entity::Entity>> objects) {
         std::string firstToRet = isDesignUsable(battleField, actor, objects);
         if (firstToRet.empty()) {
-            return isImplementationUsable(battleField, actor, objects);
+            if(isImplementationUsable(battleField, actor, objects).empty()){
+                return "";
+            }
+            else {
+                return isImplementationUsable(battleField, actor, objects);
+            }
         }
         return firstToRet;
     }
@@ -73,7 +93,9 @@ namespace skillDesigns {
                           std::vector<std::shared_ptr<entity::Entity>> objects) {
         unsafeSelfUse(crited, battleField, actor);
         for (const auto &obj: objects) {
-            unsafeTargetUse(crited, battleField, actor, obj);
+            if(obj!= nullptr) {
+                unsafeTargetUse(crited, battleField, actor, obj);
+            }
         }
     }
 
@@ -85,31 +107,30 @@ namespace skillDesigns {
         catch (const std::exception &e) {
             return "Some entity not on battleField";
         }
-
         for (const auto &obj: objects) {
-            try {
-                battleField->getSquad(obj);
-            }
-            catch (const std::exception &e) {
-                return "Some entity not on battleField";
-            }
+                try {
+                    battleField->getSquad(obj);
+                }
+                catch (const std::exception &e) {
+                    return "Some entity not on battleField";
+                }
         }
 
         auto actorSquadVector = battleField->getSquad(actor)->getEntities(); // std::vector<std::shared_ptr<Entity>>
         if (std::find(m_availableRank.begin(), m_availableRank.end(),
-                      battleField->getSquad(actor)->getIndex(actor) + 1) == m_availableRank.end()) {
+                      battleField->getSquad(actor)->getIndex(actor)) == m_availableRank.end()) {
             return "Can't act from this rank";
         }
 
         for (const auto &obj: objects) {
             if (battleField->areAllies(actor, obj)) {
                 if (std::find(m_availableAllyTarget.begin(), m_availableAllyTarget.end(),
-                              battleField->getSquad(obj)->getIndex(obj) + 1) == m_availableAllyTarget.end()) {
+                              battleField->getSquad(obj)->getIndex(obj)) == m_availableAllyTarget.end()) {
                     return "Can't act on some ally target";
                 }
             } else {
                 if (std::find(m_availableEnemyTarget.begin(), m_availableEnemyTarget.end(),
-                              battleField->getSquad(obj)->getIndex(obj) + 1) == m_availableEnemyTarget.end()) {
+                              battleField->getSquad(obj)->getIndex(obj)) == m_availableEnemyTarget.end()) {
                     return "Can't act on some enemy target";
                 }
             }
@@ -121,15 +142,19 @@ namespace skillDesigns {
     std::string
     Skill::isImplementationUsable(std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor,
                                   std::vector<std::shared_ptr<entity::Entity>> objects) {
+        for (const auto &obj: objects) {
+            if(!obj || !obj->isAlive()){
+                return "all objects must be alive";
+            }
+        }
         return "";
     }
 
     void Skill::addEffect(std::shared_ptr<entity::Entity> object, std::shared_ptr<effects::Effect> effect, std::shared_ptr<BattleField> battleField, int crited,
                           int accuracyModifier) {
-        std::shared_ptr<effects::MarkedAsResistable> markedAsResistable =
-                std::shared_ptr<effects::MarkedAsResistable>{effect, dynamic_cast<effects::MarkedAsResistable *>(effect.get())};
-        if (markedAsResistable == nullptr ||
-            resisted(object, markedAsResistable->resistanceHash(), crited) - (accuracyModifier - 100) < 0) {
+        std::shared_ptr<effects::MarkedAsResistable> markedAsResistable = std::dynamic_pointer_cast<effects::MarkedAsResistable>(effect);
+        if (object!= nullptr && (markedAsResistable == nullptr ||
+            resisted(object, markedAsResistable->resistanceHash(), crited) - (accuracyModifier - 100) < 0)) {
             changers::EffectChanger::addEffect(object, effect, battleField);
         }
     }

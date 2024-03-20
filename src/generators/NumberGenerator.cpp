@@ -5,7 +5,7 @@
 #include <random>
 std::mt19937 generators::NumberGenerator::getGenerator() {
     static std::random_device randomDevice;
-    static std::mt19937 generatorDevice = std::mt19937(randomDevice());
+    static std::mt19937 generatorDevice = std::mt19937(12);
     return generatorDevice;
 }
 int generators::NumberGenerator::generate() {

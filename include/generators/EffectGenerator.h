@@ -15,8 +15,6 @@ namespace generators {
         static std::shared_ptr<effectType> generateNumberOfTurnsEffect(int crited, int numberOfTurns, Args... args);
         template<class effectType, typename ...Args>
         static std::shared_ptr<effectType> generateUncritedEffect(int crited, Args... args);
-        template<class effectType>
-        static std::shared_ptr<effects::Effect> to_effect(std::shared_ptr<effectType> effect);
     };
     template<class effectType, typename ...Args>
     std::shared_ptr<effectType> EffectGenerator::generateImmediateCharacteristicEffect(int crited, int minCharacteristics, int maxCharacteristics, Args... args) {
@@ -60,11 +58,6 @@ namespace generators {
         else{
             return std::make_shared<effectType>(args...);
         }
-    }
-
-    template<class effectType>
-    std::shared_ptr<effects::Effect> EffectGenerator::to_effect(std::shared_ptr<effectType> effect) {
-        return std::shared_ptr<effects::Effect>{effect, dynamic_cast<effects::Effect*>(effect.get())};
     }
 } // namespace generators
 #endif //UGABUGA_EFFECTGENERATOR_H

@@ -1,7 +1,7 @@
 //
 // Created by Амир Кашапов on 18.03.2024.
 //
-#include "enemies/BrigandFusier/RushedShot.h"
+#include "enemies/BrigandFusilier/RushedShot.h"
 #include "generators/EffectGenerator.h"
 #include "effects/Damage.h"
 #include "effects/Move.h"

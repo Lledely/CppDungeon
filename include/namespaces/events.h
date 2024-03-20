@@ -5,7 +5,6 @@
 #ifndef CPPDUNGEON_EVENTS_H
 #define CPPDUNGEON_EVENTS_H
 namespace events{
-    class BattleField;
     class Chest;
     class ChooseRoomEvent;
     class EmptyCell;

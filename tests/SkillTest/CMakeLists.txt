@@ -81,4 +81,9 @@ add_executable(skillTest
         ../../src/heroes/Musketeer/Sidearm.cpp
         ../../src/heroes/Musketeer/SkeetShot.cpp
         ../../src/heroes/Musketeer/Smokescreen.cpp
+        ../../src/Item/FortifyingGarlic.cpp
+        ../../src/Item/Absinthe.cpp
+        ../../src/Item/LickWounds.cpp
+        ../../src/Item/BloodiedNeckerchief.cpp
+        ../../src/Item/Item.cpp
 )

@@ -53,7 +53,7 @@ int entity::Entity::get(int key) const {
     if (m_characteristics.find(key)!=m_characteristics.end()){
         result = m_characteristics.at(key);
         for (const auto& effect : m_effects) {
-            auto permanentEffect = dynamic_cast<effects::PermanentEffect*>(effect.get());
+            auto permanentEffect = dynamic_pointer_cast<effects::PermanentEffect>(effect);
             if(permanentEffect != nullptr)
             result += permanentEffect->getModifier()[key];
         }

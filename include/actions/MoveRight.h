@@ -11,6 +11,8 @@ namespace actions {
     class MoveRight : public Action, public changers::ActionsChanger, public changers::PositionChanger {
     public:
         void act(Player *player) override;
+        std::string getName() override;
+        bool operator==(const MoveRight& moveRight) const;
     };
 
 #endif //CPPDUNGEON_MOVERIGHT_H

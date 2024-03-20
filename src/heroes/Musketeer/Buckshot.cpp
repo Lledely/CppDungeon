@@ -6,7 +6,7 @@
 #include "effects/ForceMove.h"
 namespace Heroes {
     namespace Musketeer {
-        Buckshot::Buckshot() : RangeSkill(2, "Buckshot", {3, 4}, {}, {1}, 95, 2) {}
+        Buckshot::Buckshot() : RangeSkill(2, "Buckshot", {3, 4}, {}, {1, 2, 3, 4}, 95, 2) {}
 
         void Buckshot::unsafeTargetUse(int crited, std::shared_ptr<BattleField> battleField,
                                     std::shared_ptr<entity::Entity> actor,

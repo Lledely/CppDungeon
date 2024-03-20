@@ -8,18 +8,16 @@
 #include "player/Player.h"
 
 
-void ChooseRoomEvent::turn(Player *player) {
-    player->getMonitor()->draw();
-    player->getMap()->getCell(player->getPosition())->freeMoves(player, std::shared_ptr<Event>(this));
-    for (int coords : player->getMap()->getNextRooms()) {
-        this->addAction(
-            player,
-            std::move(std::shared_ptr<actions::ChooseNextRoom>(new actions::ChooseNextRoom(coords)))
-        );
+void events::ChooseRoomEvent::turn(Player *player) {
+    player->getMap()->getCell(player->getPosition())->freeMoves(player);
+    player->getMonitor()->draw(player);
+    player->getMap()->getCell(player->getPosition())->freeMoves(player, this);
+    for (Position coords : player->getMap()->getNextRooms(player->getPosition())) {
+        addUniqueAction(player, std::make_shared<actions::ChooseNextRoom>(coords));
     }
 }
 
-std::vector<std::vector<char>> ChooseRoomEvent::draw() {
+std::vector<std::vector<char>> events::ChooseRoomEvent::draw() {
     std::vector<std::vector<char>> sprite;
     return sprite;
 }

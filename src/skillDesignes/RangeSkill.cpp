@@ -1,6 +1,7 @@
 #include "skillDesigns/RangeSkill.h"
 #include "skillDesigns/Skill.h"
 #include "BattleField.h"
+#include "Squad.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
@@ -22,21 +23,37 @@ namespace skillDesigns {
     std::string
     RangeSkill::isDesignUsable(std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor,
                                std::vector<std::shared_ptr<entity::Entity>> objects) {
+
         std::string parentRet = Skill::isDesignUsable(battleField, actor, objects);
-        if (!parentRet.empty()) {
+        if (m_size == 1 && !parentRet.empty()) {
             return parentRet;
         }
-
-        auto battleFieldVector = battleField->getEntities(); // std::vector<std::shared_ptr<Entity>>
-        int prev_pos = -1;
-        for (const auto &obj: objects) {
-            int newPos = std::find(battleFieldVector.begin(), battleFieldVector.end(), obj) - battleFieldVector.begin();
-            if (newPos < prev_pos) {
-                return "Given objects must be in row on the BattleField";
+        else {
+            for (const auto &obj: objects) {
+                if (obj && battleField->areAllies(actor, obj)) {
+                    if (std::find(m_availableAllyTarget.begin(), m_availableAllyTarget.end(),
+                                  battleField->getSquad(obj)->getIndex(obj)) == m_availableAllyTarget.end()) {
+                        return "Can't act on some ally target";
+                    }
+                } else {
+                    if (obj && std::find(m_availableEnemyTarget.begin(), m_availableEnemyTarget.end(),
+                                  battleField->getSquad(obj)->getIndex(obj)) == m_availableEnemyTarget.end()) {
+                        return "Can't act on some enemy target";
+                    }
+                }
             }
-            prev_pos = newPos;
+            return std::string();
         }
+    }
 
-        return std::string();
+    std::string
+    RangeSkill::isImplementationUsable(std::shared_ptr<BattleField> battleField, std::shared_ptr<entity::Entity> actor,
+                                       std::vector<std::shared_ptr<entity::Entity>> objects) {
+        if(m_size==1) {
+            return Skill::isImplementationUsable(battleField, actor, objects);
+        }
+        else {
+            return "";
+        }
     }
 } // namespace skillDesigns

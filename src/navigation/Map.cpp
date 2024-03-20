@@ -5,13 +5,11 @@
 #include <iostream>
 #include <vector>
 
-
 constexpr int MAP_SIZE = 50; // doesn't depenend on window size
 constexpr int MINIMAL_ROOMS = 5;
 
 enum CellType {empty = 0, room = 1, hall = 2, new_hall = 3};
 enum RoomPosition {top = 0, right = 1, bottom = 2, left = 3, center = 4};
-
 
 
 struct MyDefinitionRoom {
@@ -318,8 +316,13 @@ Position Map::moveRight(Position pos) {
     return pos;
 }
 
-char Map::getNextRoom(Position pos) {
-    return pos.m_destination;
+Position Map::getNextRoom(Position pos) {
+    if(pos.m_destination==-1){
+        return pos;
+    }
+    else {
+        return m_roomPositions[pos.m_destination];
+    }
 }
 
 int Map::getSeed() {

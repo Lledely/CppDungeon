@@ -5,7 +5,6 @@
 #include "player/Player.h"
 void changers::ActionsChanger::addAction(Player *player, const std::shared_ptr<actions::Action>& action) {
     player->m_actions.insert(action);
-    return;
 }
 std::set<std::shared_ptr<actions::Action>>& changers::ActionsChanger::getActions(Player *player) {
     return player->m_actions;
