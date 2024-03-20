@@ -6,6 +6,7 @@
 #define CPPDUNGEON_CHEST_H
 #include "events/UsableEvent.h"
 #include "changers/InventoryChanger.h"
+#include "Save.h"
 class Player;
 namespace events {
     class Chest : public events::UsableEvent, public changers::InventoryChanger, public std::enable_shared_from_this<UsableEvent> {
@@ -20,6 +21,8 @@ namespace events {
         void use(Player *player) override;
 
         std::vector<std::vector<char>> draw() override;
+
+        friend Save;
     };
 } // namespace events
 #endif //CPPDUNGEON_CHEST_H
