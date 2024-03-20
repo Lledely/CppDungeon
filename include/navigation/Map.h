@@ -4,8 +4,9 @@
 
 #ifndef CPPDUNGEON_MAP_H
 #define CPPDUNGEON_MAP_H
-#include "Cell.h"
-#include "Position.h"
+#include "navigation/Cell.h"
+#include "Save.h"
+#include "navigation/Position.h"
 #include <queue>
 #include <ctime>
 #include <random>
@@ -27,6 +28,8 @@ public:
     int getSize(); // done
     int getSeed(); // done
     Position getStartPosition(); // done
+
+    friend Save;
 private:
     std::vector<std::vector<char>> m_contents;
     std::vector<std::vector<std::shared_ptr<Cell>>> m_cells;

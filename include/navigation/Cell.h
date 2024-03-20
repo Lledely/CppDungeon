@@ -5,6 +5,7 @@
 #ifndef UNTITLED_CELL_H
 #define UNTITLED_CELL_H
 #include "events/Event.h"
+#include "Save.h"
 #include <vector>
 class Cell: public changers::ActionsChanger{
 public:
@@ -13,6 +14,8 @@ public:
     std::vector<std::shared_ptr<events::Event>> getEvents();
     char getLevel();
     virtual ~Cell() = default;
+    
+    friend Save;
 protected:
     std::vector<std::shared_ptr<events::Event>> m_events;
 private:
